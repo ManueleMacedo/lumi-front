@@ -1,0 +1,53 @@
+<div class="container">
+  
+  <div class="toast-sucesso" *ngIf="statusSincronizacao === 'SUCESSO'">
+    ✅ Sincronização concluída! 5 tarefas criadas no projeto {{ jiraKey }}.
+  </div>
+
+  <header>
+    <div class="logo-placeholder">🔵 Logo</div>
+    <h2>Roadmap Sugerido e Sincronização com Jira</h2>
+    <p class="subtitle">Visualize o planejamento semanal e sincronize com seu projeto Jira</p>
+  </header>
+
+  <div class="sync-bar">
+    <div class="input-wrapper">
+      <label>Chave do Projeto Jira</label>
+      <input type="text" [(ngModel)]="jiraKey" placeholder="Ex: PROJ-01">
+    </div>
+    
+    <button 
+      class="btn-jira" 
+      (click)="sincronizarComJira()"
+      [disabled]="statusSincronizacao === 'CARREGANDO'">
+      
+      <span *ngIf="statusSincronizacao === 'PARADO'">SINCRONIZAR COM O JIRA</span>
+      <span *ngIf="statusSincronizacao === 'CARREGANDO'">⏳ Enviando...</span>
+      <span *ngIf="statusSincronizacao === 'SUCESSO'">✔ Sincronizado!</span>
+    </button>
+  </div>
+
+  <div class="board">
+    
+    <div class="coluna" *ngFor="let sprint of sprints">
+      <div class="coluna-header">
+        <h3>🗓 {{ sprint.titulo }}</h3>
+        <span>{{ sprint.periodo }}</span>
+      </div>
+
+      <div class="cards-container">
+        <div class="card-miniatura" *ngFor="let card of sprint.cards">
+          <p class="card-titulo">Como {{ card.papel }}, quero {{ card.acao }}...</p>
+          
+          <div class="card-footer">
+            <span class="prioridade-dot" [class]="card.prioridade"></span>
+            <small>{{ card.prioridade }}</small>
+            <span class="spacer">|</span>
+            <small>{{ card.estimativa }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

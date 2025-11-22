@@ -1,0 +1,86 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+header h2 { margin-bottom: 0.5rem; }
+header .subtitle { color: #666; }
+.logo-placeholder { color: #4A90E2; font-weight: bold; margin-bottom: 1rem; }
+
+/* Card da História */
+.card-historia {
+  background: white;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha itens ao topo */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.conteudo { flex: 1; margin-right: 20px; }
+
+.texto-historia {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.texto-historia .seta {
+  color: #E94E77;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Modo Edição */
+.modo-edicao {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 1rem;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.input-group { display: flex; align-items: center; gap: 10px; }
+.input-group span { width: 50px; font-weight: bold; color: #666; }
+.input-group input { flex: 1; padding: 5px; border: 1px solid #ddd; border-radius: 4px; }
+
+/* Tags */
+.tags { display: flex; gap: 10px; }
+.tag { padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; }
+
+/* Cores das Prioridades */
+.prioridade.ALTA { background: #FFEBEE; color: #D32F2F; }
+.prioridade.MEDIA { background: #FFF3E0; color: #F57C00; }
+.prioridade.BAIXA { background: #E8F5E9; color: #388E3C; }
+.estimativa { background: #F5F5F5; color: #666; }
+
+/* Botões */
+.acoes { display: flex; gap: 10px; }
+.btn-icon { background: none; border: none; font-size: 1.2rem; cursor: pointer; opacity: 0.6; transition: 0.2s; }
+.btn-icon:hover { opacity: 1; transform: scale(1.1); }
+.btn-icon.delete:hover { color: red; }
+
+.btn-primary {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  display: block;
+  margin: 2rem auto;
+}
+.btn-primary:hover { background-color: #357ABD; }

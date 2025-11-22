@@ -1,0 +1,53 @@
+<div class="container">
+  
+  <header class="text-center">
+    <div class="logo-placeholder">🔵 Logo</div>
+    <h1>Gerador de Plano de Projeto com IA</h1>
+    <p class="subtitle">Carregue seus requisitos e deixe a IA criar histórias de usuário e roadmap automaticamente</p>
+  </header>
+
+  <div class="upload-card">
+    
+    <div 
+      class="drop-zone" 
+      (drop)="onDrop($event)" 
+      (dragover)="onDragOver($event)"
+      *ngIf="!arquivoSelecionado">
+      
+      <div class="icon">⬆️</div>
+      <h3>Arraste e solte seu documento aqui</h3>
+      <p>ou clique para selecionar (PDF, DOCX, DOC, TXT - máx. 20MB)</p>
+      
+      <input type="file" #fileInput (change)="onFileSelected($event)" hidden accept=".pdf,.doc,.docx,.txt">
+      <button class="btn-secondary" (click)="fileInput.click()">Selecionar Arquivo</button>
+    </div>
+
+    <div class="file-loaded" *ngIf="arquivoSelecionado">
+      <div class="icon-file">📄</div>
+      <div class="file-info">
+        <h3>{{ arquivoSelecionado?.name }}</h3>
+        <p>{{ (arquivoSelecionado?.size! / 1024).toFixed(2) }} KB</p>
+      </div>
+      <button class="btn-secondary" (click)="removerArquivo()">Alterar Arquivo</button>
+    </div>
+
+  </div>
+
+  <div class="form-section">
+    <label>Nome do Projeto</label>
+    <input type="text" [(ngModel)]="nomeProjeto" placeholder="Ex: Sistema de gestão financeira">
+
+    <label>Contexto Adicional (opcional)</label>
+    <textarea [(ngModel)]="contextoAdicional" placeholder="Adicione contexto adicional, objetivos..."></textarea>
+  </div>
+
+  <div class="actions">
+    <button 
+      class="btn-primary" 
+      (click)="gerarRoadmap()"
+      [disabled]="!nomeProjeto || !arquivoSelecionado">
+      GERAR HISTÓRIAS E ROADMAP
+    </button>
+  </div>
+
+</div>

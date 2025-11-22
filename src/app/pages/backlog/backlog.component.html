@@ -1,0 +1,56 @@
+<div class="container">
+  <header>
+    <div class="logo-placeholder">🔵 Logo</div>
+    <h2>Revisão e Refinamento do Backlog</h2>
+    <p class="subtitle">Projeto: Sistema de Gestão de Vendas</p>
+  </header>
+
+  <div class="lista-historias">
+    
+    <div class="card-historia" *ngFor="let historia of historias">
+      
+      <div class="conteudo">
+        
+        <div class="texto-historia" *ngIf="!historia.editando">
+          <span class="seta">></span> 
+          Como <strong>{{ historia.papel }}</strong>, 
+          quero <strong>{{ historia.acao }}</strong> 
+          para <strong>{{ historia.beneficio }}</strong>
+        </div>
+
+        <div class="modo-edicao" *ngIf="historia.editando">
+          <div class="input-group">
+            <span>Como</span> <input [(ngModel)]="historia.papel">
+          </div>
+          <div class="input-group">
+            <span>quero</span> <input [(ngModel)]="historia.acao">
+          </div>
+          <div class="input-group">
+            <span>para</span> <input [(ngModel)]="historia.beneficio">
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag prioridade" [class]="historia.prioridade">
+            {{ historia.prioridade }}
+          </span>
+          <span class="tag estimativa">
+            ⏱ {{ historia.estimativa }}
+          </span>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <button class="btn-icon" (click)="alternarEdicao(historia)">
+          {{ historia.editando ? '✅' : '✏️' }}
+        </button>
+        <button class="btn-icon delete" (click)="deletar(historia.id)">🗑️</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer-actions">
+    <button class="btn-primary" (click)="avancar()">APROVAR BACKLOG E GERAR ROADMAP</button>
+  </div>
+</div>

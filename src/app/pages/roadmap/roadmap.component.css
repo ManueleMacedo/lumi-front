@@ -1,0 +1,118 @@
+.container {
+  max-width: 1200px; /* Mais largo que as outras telas */
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  position: relative; /* Para o toast funcionar */
+}
+
+header { margin-bottom: 2rem; }
+.logo-placeholder { color: #4A90E2; font-weight: bold; margin-bottom: 1rem; }
+
+/* Barra de Sync */
+.sync-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  background: #F8F9FA;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.input-wrapper { flex: 1; }
+.input-wrapper label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;}
+.input-wrapper input { 
+  width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; 
+  box-sizing: border-box;
+}
+
+.btn-jira {
+  background-color: #0052CC; /* Azul do Jira */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 200px;
+}
+.btn-jira:disabled { opacity: 0.7; cursor: wait; }
+.btn-jira:hover:not(:disabled) { background-color: #0043a8; }
+
+/* Kanban Board */
+.board {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Permite rolar pro lado se tiver muitas semanas */
+  padding-bottom: 20px;
+}
+
+.coluna {
+  flex: 1;
+  min-width: 250px;
+  background: #F4F5F7;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.coluna-header {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+.coluna-header h3 { margin: 0; font-size: 1rem; }
+.coluna-header span { font-size: 0.8rem; color: #666; }
+
+/* Miniatura do Card */
+.card-miniatura {
+  background: white;
+  padding: 12px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  border-left: 3px solid transparent;
+}
+.card-miniatura:hover { box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; }
+
+.card-titulo { 
+  margin: 0 0 10px 0; 
+  font-size: 0.9rem; 
+  line-height: 1.4;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.prioridade-dot {
+  width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px;
+}
+.prioridade-dot.ALTA { background-color: #FF5252; }
+.prioridade-dot.MEDIA { background-color: #FFAB00; }
+.prioridade-dot.BAIXA { background-color: #4CAF50; }
+
+.spacer { margin: 0 8px; color: #ccc; }
+
+/* Toast Notification */
+.toast-sucesso {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  animation: slideIn 0.5s ease-out;
+  z-index: 100;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
