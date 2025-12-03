@@ -20,7 +20,7 @@ interface Sprint {
 })
 export class RoadmapComponent implements OnInit {
 
-  jiraKey: string = 'LUMI';
+  jiraKey: string = 'KAN';
   statusSincronizacao: string = 'PARADO';
   sprints: Sprint[] = [];
   totalSincronizado: number = 0;
@@ -84,5 +84,9 @@ export class RoadmapComponent implements OnInit {
         });
       }
     });
+  }
+  
+  voltarParaBacklog(): void {
+    this.router.navigate(['/backlog']);
   }
 }

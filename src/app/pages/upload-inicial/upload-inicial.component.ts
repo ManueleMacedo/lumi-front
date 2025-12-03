@@ -22,7 +22,7 @@ export class UploadInicialComponent implements OnInit {
     arquivoSelecionado: File | null = null; 
     status: StatusUpload = 'PARADO'; 
     
-    prompt: string = ''; 
+    prompt: string = ''; // Não usado, mas mantido.
 
     constructor(
         private userStoryService: UserStoryService,
@@ -42,6 +42,7 @@ export class UploadInicialComponent implements OnInit {
         }
     }
 
+    // --- MÉTODO CORRIGIDO ---
     gerarEAvancar(): void {
         if (!this.arquivoSelecionado || this.status === 'CARREGANDO') {
             alert('Por favor, selecione um arquivo para continuar.');
@@ -50,21 +51,27 @@ export class UploadInicialComponent implements OnInit {
 
         this.status = 'CARREGANDO';
 
-        this.prompt = `Projeto: ${this.nomeDoProjeto}. Contexto: ${this.contextoAdicional}.`;
+        // 1. Constrói o prompt completo
+        const promptCompleto = `Nome do Projeto: ${this.nomeDoProjeto}\nContexto Adicional: ${this.contextoAdicional}`;
 
-        const formData = new FormData();
-        formData.append('prompt', this.prompt); 
-        formData.append('file', this.arquivoSelecionado, this.arquivoSelecionado.name); 
+        // 2. Cria o objeto FormData
+        const formData = new FormData();
+        
+        // O backend espera a string com a chave 'prompt'
+        formData.append('prompt', promptCompleto);
+        
+        // O backend espera o arquivo com a chave 'file'
+        formData.append('file', this.arquivoSelecionado, this.arquivoSelecionado.name);
 
         this.userStoryService.gerarEProcessarHistorias(formData).subscribe({
-            next: (historias) => {
+            next: () => {
                 this.status = 'SUCESSO';
                 this.router.navigate(['/backlog']);
             },
             error: (err) => {
+                console.error('Erro na geração de histórias:', err);
                 this.status = 'ERRO';
-                console.error('Erro ao processar upload:', err);
-                alert('Falha ao processar e salvar histórias. Verifique o console.');
+                alert('Falha ao gerar histórias. Verifique o console ou a API do Gemini/Backend.');
             }
         });
     }

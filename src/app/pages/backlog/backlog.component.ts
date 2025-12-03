@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class BacklogComponent implements OnInit {
 
   historias: UserStory[] = [];
-  jiraKey: string = 'LUMI';
+  jiraKey: string = 'KAN';
 
   constructor(
     private userStoryService: UserStoryService,

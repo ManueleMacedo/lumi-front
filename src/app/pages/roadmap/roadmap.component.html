@@ -1,7 +1,7 @@
 <div class="container">
     
     <div class="toast-sucesso" *ngIf="statusSincronizacao === 'SUCESSO'">
-        Sincronização concluída! {{ totalSincronizado }} tarefas criadas no projeto {{ jiraKey }}.
+        Sincronização concluída! {{ totalSincronizado }} tarefas criadas no projeto **{{ jiraKey }}**.
     </div>
 
     <header>
@@ -11,15 +11,10 @@
     </header>
 
     <div class="sync-bar">
-        <div class="input-wrapper">
-            <label>Chave do Projeto Jira</label>
-            <input type="text" [(ngModel)]="jiraKey" placeholder="Ex: PROJ-01">
-        </div>
-        
         <button 
             class="btn-jira" 
             (click)="sincronizarComJira()"
-            [disabled]="!jiraKey || statusSincronizacao === 'CARREGANDO' || sprints.length === 0">
+            [disabled]="statusSincronizacao === 'CARREGANDO' || sprints.length === 0">
             
             <span *ngIf="statusSincronizacao === 'PARADO'">SINCRONIZAR COM O JIRA</span>
             <span *ngIf="statusSincronizacao === 'CARREGANDO'">Enviando...</span>
@@ -49,6 +44,9 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="footer-actions">
+        <button class="btn-secondary large" (click)="voltarParaBacklog()">VOLTAR PARA BACKLOG</button>
     </div>
 </div>

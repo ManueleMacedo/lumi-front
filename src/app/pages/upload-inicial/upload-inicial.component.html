@@ -35,8 +35,9 @@
             (click)="gerarEAvancar()"
             [disabled]="!arquivoSelecionado || status === 'CARREGANDO'"
         >
-            <span *ngIf="status === 'PARADO' || status === 'SUCESSO'">GERAR HISTÓRIAS E ROADMAP</span>
-            <span *ngIf="status === 'CARREGANDO'">GERANDO... AGUARDE</span>
+            <span *ngIf="status === 'PARADO' || status === 'SUCESSO'">GERAR HISTÓRIAS DE USUÁRIO</span>
+            <span *ngIf="status === 'CARREGANDO'">Gerando Histórias...</span>
+            <span *ngIf="status === 'ERRO'">Tentar Novamente</span>
         </button>
     </div>
 </div>
