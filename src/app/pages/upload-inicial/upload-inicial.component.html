@@ -1,43 +1,69 @@
 <div class="container">
-    <div class="logo-placeholder">Logo</div>
+
+<div class="logo-placeholder">
+    <img src="LOGO.png" alt="Logo Lumi - AI Project Guide" class="lumi-image-logo">
+</div>
+
+<h1>Gerador de Plano de Projeto com IA</h1>
+<p class="subtitle">Carregue seus requisitos e deixe a IA criar histórias de usuário e roadmap automaticamente</p>
+
+<input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
+
+<div class="upload-area">
     
-    <h1>Gerador de Plano de Projeto com IA</h1>
-    <p class="subtitle">Carregue seus requisitos e deixe a IA criar histórias de usuário e roadmap automaticamente</p>
-
-    <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
-
-    <div class="upload-area">
-        <div class="file-card" *ngIf="arquivoSelecionado">
-            
-            <div class="file-icon"></div>
-            
-            <div class="file-details">
-                <h3>{{ arquivoSelecionado.name }}</h3>
-                <p>{{ (arquivoSelecionado.size / 1024).toFixed(2) }} KB</p>
-                <button class="btn-secondary" (click)="fileInput.click()">Alterar Arquivo</button> 
-            </div>
-        </div>
+    <div class="file-card file-loaded" *ngIf="arquivoSelecionado">
         
-        <div class="file-card placeholder" *ngIf="!arquivoSelecionado" (click)="fileInput.click()">
-            <span>Arraste ou clique para enviar o arquivo de requisitos</span>
+        <div class="file-icon"></div>
+        
+        <div class="file-details">
+            <h3>{{ arquivoSelecionado.name }}</h3>
+            <p>{{ (arquivoSelecionado.size / 1024).toFixed(2) }} KB</p>
+            <button class="btn-secondary" (click)="fileInput.click()">Alterar Arquivo</button> 
         </div>
     </div>
-
-    <div class="form-area">
-        <label for="projeto-nome">Nome do Projeto</label>
-        <input id="projeto-nome" type="text" [(ngModel)]="nomeDoProjeto" placeholder="Ex: Sistema de Vendas">
+    
+    <div class="file-card placeholder" *ngIf="!arquivoSelecionado">
         
-        <label for="contexto-adicional">Contexto Adicional (opcional)</label>
-        <textarea id="contexto-adicional" [(ngModel)]="contextoAdicional" placeholder="Adicione contexto adicional, objetivos..."></textarea>
+        <div class="upload-icon">
+            <img src="/upload.png" alt="Ícone de Upload"> 
+        </div>
         
-        <button 
-            class="btn-primary" 
-            (click)="gerarEAvancar()"
-            [disabled]="!arquivoSelecionado || status === 'CARREGANDO'"
-        >
-            <span *ngIf="status === 'PARADO' || status === 'SUCESSO'">GERAR HISTÓRIAS DE USUÁRIO</span>
-            <span *ngIf="status === 'CARREGANDO'">Gerando Histórias...</span>
-            <span *ngIf="status === 'ERRO'">Tentar Novamente</span>
+        <span (click)="fileInput.click()">Arraste ou solte seu documento aqui</span>
+        <p class="file-format-info">ou clique para selecionar (PDF, DOCX, DOC, TXT - máx. 20MB)</p>
+        
+        <button class="btn-upload-select" (click)="fileInput.click()">
+            Selecionar Arquivo
         </button>
     </div>
+</div>
+
+<div class="form-area">
+    
+    <label for="projeto-nome">Nome do Projeto</label>
+    <input 
+        id="projeto-nome" 
+        type="text" 
+        [(ngModel)]="nomeDoProjeto" 
+        placeholder="Ex: Sistema de gestão financeiro"
+    >
+    
+    <label for="contexto-adicional">Contexto Adicional (opcional)</label>
+    <textarea 
+        id="contexto-adicional" 
+        [(ngModel)]="contextoAdicional" 
+        placeholder="Adicione contexto adicional: objetivos do stakeholders, restrições técnicas, etc"
+    ></textarea>
+    
+    <button 
+        class="btn-primary" 
+        (click)="gerarEAvancar()"
+        [disabled]="!arquivoSelecionado || status === 'CARREGANDO'"
+    >
+        <span *ngIf="status === 'PARADO' || status === 'SUCESSO'">GERAR HISTÓRIAS E ROADMAP</span>
+        <span *ngIf="status === 'CARREGANDO'"><i class="spinner"></i> Gerando Histórias...</span>
+        <span *ngIf="status === 'ERRO'">Tentar Novamente</span>
+    </button>
+</div>
+
+
 </div>
